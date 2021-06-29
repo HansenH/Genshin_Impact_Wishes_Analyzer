@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# 导出抽卡记录
+# 导出抽卡记录 by HansenH
 
 ADDRESS = 'https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog'
 TIMESLEEP = 0.2
