@@ -57,7 +57,7 @@ def calculate(dataframe):
             five_avg, four_avg, five_wait, four_wait, five_list, four_list, fromdate, todate)
 
 def results_output(results, excel_filename):
-    filename = 'results_' + excel_filename[-19:-5] + '.txt'
+    filename = 'results_' + excel_filename[:-5] + '.txt'
     with open(filename, 'w', encoding='UTF-8') as fo:
         fo.write('原神祈愿历史记录分析 ({})'.format(excel_filename))
         fo.write('\n\n\n>>>>>>角色祈愿<<<<<<\n')
