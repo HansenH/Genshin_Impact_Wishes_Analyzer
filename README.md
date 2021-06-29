@@ -4,7 +4,12 @@
 Genshin Impact Wishes Analyzer.  
 Read wishes log from URL and save them to Excel. Analyze wishes' history data with Python.  
 </br>
+### 为什么写这个程序：
+很多现有的原神抽卡分析工具只能从URL而非文件分析历史记录，而官方只可查看过去6个月的历史记录。  
+通过这个工具可以持久化保存之前的记录，可以自己将记录拼接，分析更长期的记录。  
+</br>
 ### 需要安装的Python非标准库:  
+```pip install ...```  
 openpyxl  
 pandas  
 requests  
