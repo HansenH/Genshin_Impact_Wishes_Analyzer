@@ -1,16 +1,17 @@
 # -*- coding: UTF-8 -*-
 # 导出抽卡记录 by HansenH
 
-ADDRESS = 'https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog'
-TIMESLEEP = 0.2
-PAGE_SIZE = 6
-
 import json
 import time
 from datetime import datetime
 import requests
 import pandas
 from urllib import parse
+
+ADDRESS = 'https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog'
+TIMESLEEP = 0.2
+PAGE_SIZE = 6
+
 
 def export_log(url):
     resolved = dict(parse.parse_qsl(parse.urlsplit(url.strip()).query))
@@ -130,9 +131,9 @@ def export_log(url):
     data1 = []
     for i in range(len(character_wishes)-1, -1, -1):
         data1.append({
-            '类型': character_wishes[i]['item_type'], 
-            '名称': character_wishes[i]['name'], 
-            '星级': character_wishes[i]['rank_type'], 
+            '类型': character_wishes[i]['item_type'],
+            '名称': character_wishes[i]['name'],
+            '星级': character_wishes[i]['rank_type'],
             '时间': character_wishes[i]['time']
         })
     df1 = pandas.DataFrame(data1, columns=('类型', '名称', '星级', '时间'))
@@ -140,9 +141,9 @@ def export_log(url):
     data2 = []
     for i in range(len(weapon_wishes)-1, -1, -1):
         data2.append({
-            '类型': weapon_wishes[i]['item_type'], 
-            '名称': weapon_wishes[i]['name'], 
-            '星级': weapon_wishes[i]['rank_type'], 
+            '类型': weapon_wishes[i]['item_type'],
+            '名称': weapon_wishes[i]['name'],
+            '星级': weapon_wishes[i]['rank_type'],
             '时间': weapon_wishes[i]['time']
         })
     df2 = pandas.DataFrame(data2, columns=('类型', '名称', '星级', '时间'))
@@ -150,9 +151,9 @@ def export_log(url):
     data3 = []
     for i in range(len(standard_wishes)-1, -1, -1):
         data3.append({
-            '类型': standard_wishes[i]['item_type'], 
-            '名称': standard_wishes[i]['name'], 
-            '星级': standard_wishes[i]['rank_type'], 
+            '类型': standard_wishes[i]['item_type'],
+            '名称': standard_wishes[i]['name'],
+            '星级': standard_wishes[i]['rank_type'],
             '时间': standard_wishes[i]['time']
         })
     df3 = pandas.DataFrame(data3, columns=('类型', '名称', '星级', '时间'))
@@ -160,16 +161,16 @@ def export_log(url):
     data4 = []
     for i in range(len(novice_wishes)-1, -1, -1):
         data4.append({
-            '类型': novice_wishes[i]['item_type'], 
-            '名称': novice_wishes[i]['name'], 
-            '星级': novice_wishes[i]['rank_type'], 
+            '类型': novice_wishes[i]['item_type'],
+            '名称': novice_wishes[i]['name'],
+            '星级': novice_wishes[i]['rank_type'],
             '时间': novice_wishes[i]['time']
         })
     df4 = pandas.DataFrame(data4, columns=('类型', '名称', '星级', '时间'))
 
     # 写入Excel
     filename = 'wishes_{}.xlsx'.format(datetime.now().strftime("%Y%m%d%H%M%S"))
-    xlsx_writer=pandas.ExcelWriter(filename)
+    xlsx_writer = pandas.ExcelWriter(filename)
     df1.to_excel(xlsx_writer, sheet_name="角色祈愿", index=False)
     df2.to_excel(xlsx_writer, sheet_name="武器祈愿", index=False)
     df3.to_excel(xlsx_writer, sheet_name="常驻祈愿", index=False)

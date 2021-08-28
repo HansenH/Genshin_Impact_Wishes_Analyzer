@@ -4,13 +4,20 @@
 import pandas
 import os
 
+
 def analyze(filename):
-    df_character = pandas.read_excel(filename, usecols='A:D', sheet_name=0, engine='openpyxl')
-    df_weapon = pandas.read_excel(filename, usecols='A:D', sheet_name=1, engine='openpyxl')
-    df_standard = pandas.read_excel(filename, usecols='A:D', sheet_name=2, engine='openpyxl')
-    df_novice = pandas.read_excel(filename, usecols='A:D', sheet_name=3, engine='openpyxl')
-    results = (calculate(df_character), calculate(df_weapon), calculate(df_standard), calculate(df_novice))
+    df_character = pandas.read_excel(
+        filename, usecols='A:D', sheet_name=0, engine='openpyxl')
+    df_weapon = pandas.read_excel(
+        filename, usecols='A:D', sheet_name=1, engine='openpyxl')
+    df_standard = pandas.read_excel(
+        filename, usecols='A:D', sheet_name=2, engine='openpyxl')
+    df_novice = pandas.read_excel(
+        filename, usecols='A:D', sheet_name=3, engine='openpyxl')
+    results = (calculate(df_character), calculate(df_weapon),
+               calculate(df_standard), calculate(df_novice))
     results_output(results, filename)
+
 
 def calculate(dataframe):
     '''返回总抽卡数，5星总数与占比，4星总数与占比，3星总数与占比，平均y抽出5星，平均y抽出4星，
@@ -53,8 +60,9 @@ def calculate(dataframe):
         five_percent = round(100 * five_count / total, 2)
         four_percent = round(100 * four_count / total, 2)
         three_percent = round(100 * three_count / total, 2)
-    return (total, five_count, four_count, three_count, five_percent, four_percent, three_percent, 
+    return (total, five_count, four_count, three_count, five_percent, four_percent, three_percent,
             five_avg, four_avg, five_wait, four_wait, five_list, four_list, fromdate, todate)
+
 
 def results_output(results, excel_filename):
     filename = 'results_' + excel_filename[:-5] + '.txt'
@@ -64,8 +72,10 @@ def results_output(results, excel_filename):
         fo.write('{} ~ {}\n\n'.format(results[0][13], results[0][14]))
         fo.write('共{}抽\n'.format(results[0][0]))
         fo.write('|五星\t|四星\t|三星\t|\n')
-        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(results[0][1], results[0][2], results[0][3]))
-        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(results[0][4], results[0][5], results[0][6]))
+        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(
+            results[0][1], results[0][2], results[0][3]))
+        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
+            results[0][4], results[0][5], results[0][6]))
         fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[0][7], results[0][8]))
         fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[0][9], results[0][10]))
         if results[0][1] > 0:
@@ -80,8 +90,10 @@ def results_output(results, excel_filename):
         fo.write('{} ~ {}\n\n'.format(results[1][13], results[1][14]))
         fo.write('共{}抽\n'.format(results[1][0]))
         fo.write('|五星\t|四星\t|三星\t|\n')
-        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(results[1][1], results[1][2], results[1][3]))
-        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(results[1][4], results[1][5], results[1][6]))
+        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(
+            results[1][1], results[1][2], results[1][3]))
+        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
+            results[1][4], results[1][5], results[1][6]))
         fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[1][7], results[1][8]))
         fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[1][9], results[1][10]))
         if results[1][1] > 0:
@@ -96,8 +108,10 @@ def results_output(results, excel_filename):
         fo.write('{} ~ {}\n\n'.format(results[2][13], results[2][14]))
         fo.write('共{}抽\n'.format(results[2][0]))
         fo.write('|五星\t|四星\t|三星\t|\n')
-        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(results[2][1], results[2][2], results[2][3]))
-        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(results[2][4], results[2][5], results[2][6]))
+        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(
+            results[2][1], results[2][2], results[2][3]))
+        fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
+            results[2][4], results[2][5], results[2][6]))
         fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[2][7], results[2][8]))
         fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[2][9], results[2][10]))
         if results[2][1] > 0:
@@ -112,8 +126,10 @@ def results_output(results, excel_filename):
         fo.write('{} ~ {}\n\n'.format(results[3][13], results[3][14]))
         fo.write('共{}抽\n'.format(results[3][0]))
         fo.write('|五星\t|四星\t|三星\t|\n')
-        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(results[3][1], results[3][2], results[3][3]))
-        fo.write('|{}%\t|{}%\t|{}%\t|'.format(results[3][4], results[3][5], results[3][6]))
+        fo.write('|{}  \t|{}  \t|{}  \t|\n'.format(
+            results[3][1], results[3][2], results[3][3]))
+        fo.write('|{}%\t|{}%\t|{}%\t|'.format(
+            results[3][4], results[3][5], results[3][6]))
         if results[3][1] > 0:
             fo.write('\n\n五星列表：\n')
             for item in results[3][11]:
