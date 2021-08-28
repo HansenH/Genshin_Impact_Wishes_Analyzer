@@ -39,7 +39,13 @@ class WishesBase():
         self.df = None
 
     def run(self):
-        raise NotImplementedError
+        self.init_params()
+        self.check_params()
+        self.fetch_request()
+        self.process_data()
+        self.to_local_file()
+        self.to_remote_storage()
+
 
     def init_params(self):
         raise NotImplementedError
@@ -77,6 +83,7 @@ class WishesBase():
         self.df = pd.DataFrame(
             data, columns = ('item_type', 'name', 'rank_type', 'time')
         )
+        print(self.df.to_string())
     
     def to_local_file(self):
         '''

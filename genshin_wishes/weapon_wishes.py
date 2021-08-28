@@ -1,4 +1,4 @@
-from wishes_base import WishesBase
+from .wishes_base import WishesBase
 
 class WeaponWishes(WishesBase):
     def init_params(self):

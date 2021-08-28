@@ -1,5 +1,5 @@
 
-from wishes_base import WishesBase
+from .wishes_base import WishesBase
 
 class StandardWishes(WishesBase):
     def init_params(self):
