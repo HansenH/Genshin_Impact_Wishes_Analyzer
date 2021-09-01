@@ -1,10 +1,10 @@
 # Genshin_Impact_Wishes_Analyzer
 
-## by HansenH 20210629
+## by HansenH 20210629, EYH 20210828
 
 原神抽卡数据读取，保存，与分析。
 Genshin Impact Wishes Analyzer.
-Read wishes log from URL and save them to Excel. Analyze wishes' history data with Python.
+Read wishes log from URL and save them to csv and mysql db (local or remote). Analyze wishes' history data with Python.
 `</br>`
 
 ### 为什么写这个程序
@@ -28,15 +28,20 @@ pip install requests
 
 ## Usage
 
-### Get History
+### All-in-one Bootstrap
 
 ```python
-python export_log.py
-请输入URL:
+python3 bootstrap.py all
 ```
 
-### Analyze
+For more detail, see `./idl/enum.pyi`.
 
-```bash
-python analyzer/analyzer.py
+### CLI
+
+```python
+> from genshin_wishes import *
+> job = CharacterWishes(url)
+> job.run()
+> job.analyze()
 ```
+
