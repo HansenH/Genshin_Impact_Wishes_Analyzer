@@ -1,6 +1,5 @@
 import json
 import time
-from datetime import datetime
 import requests
 import pandas as pd
 from urllib import parse
@@ -8,6 +7,7 @@ from urllib import parse
 ADDRESS = 'https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog'
 TIMESLEEP = 0.2
 PAGE_SIZE = 6
+
 
 class WishesBase():
     def __init__(self, url):
@@ -46,7 +46,6 @@ class WishesBase():
         self.to_local_file()
         self.to_remote_storage()
 
-
     def init_params(self):
         raise NotImplementedError
 
@@ -58,12 +57,16 @@ class WishesBase():
 
     def fetch_request(self):
         while True:
-            resp = requests.get(ADDRESS, params = self.params)
+            resp = requests.get(ADDRESS, params=self.params)
             if resp.status_code != 200:
-                raise RuntimeError("Request Failed: {}.".format(resp.status_code))
+                raise RuntimeError(
+                    "Request Failed: {}.".format(resp.status_code)
+                )
             response = json.loads(resp.text)
             if response['message'].upper() != 'OK':
-                raise RuntimeError("Request Failed: {}.".format(response['message']))
+                raise RuntimeError(
+                    "Request Failed: {}.".format(response['message'])
+                )
             self.wishes += response['data']['list']
             if len(response['data']['list']) < PAGE_SIZE:
                 break
@@ -81,10 +84,10 @@ class WishesBase():
                 'time': self.wishes[i]['time']
             })
         self.df = pd.DataFrame(
-            data, columns = ('item_type', 'name', 'rank_type', 'time')
+            data, columns=('item_type', 'name', 'rank_type', 'time')
         )
         print(self.df.to_string())
-    
+
     def to_local_file(self):
         '''
         write to local csv file for view.
@@ -97,3 +100,5 @@ class WishesBase():
         '''
         raise NotImplementedError
 
+    def analyze(self):
+        pass
