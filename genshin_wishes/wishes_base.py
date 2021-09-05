@@ -121,9 +121,9 @@ class WishesBase():
         5星列表（抽卡数），4星列表（抽卡数），日期范围
         """
 
-        fromdate = dataframe.iat[0, 3].split()[0]
-        todate = dataframe.iat[-1, 3].split()[0]
-        total = len(dataframe)
+        fromdate = self.df.iat[0, 3].split()[0]
+        todate = self.df.iat[-1, 3].split()[0]
+        total = len(self.df)
         five_count = 0
         four_count = 0
         three_count = 0
@@ -137,7 +137,7 @@ class WishesBase():
         five_avg = 0.0
         four_avg = 0.0
        
-       for row in dataframe.itertuples():
+        for row in self.df.itertuples():
             if row[3] == 3:
                 three_count += 1
                 four_wait += 1
@@ -164,9 +164,9 @@ class WishesBase():
         return (total, five_count, four_count, three_count, five_percent, four_percent, three_percent,
                 five_avg, four_avg, five_wait, four_wait, five_list, four_list, fromdate, todate)
 
-    def write_result_file(self, result):
+    def write_result_file(self, results):
         with open(self.rst_file_name, 'w', encoding='UTF-8') as fo:
-            fo.write('原神祈愿历史记录分析 ({})'.format(excel_filename))
+            fo.write('原神祈愿历史记录分析 ({})'.format(self.rst_file_name))
             fo.write('\n\n\n>>>>>>角色祈愿<<<<<<\n')
             fo.write('{} ~ {}\n\n'.format(results[0][13], results[0][14]))
             fo.write('共{}抽\n'.format(results[0][0]))
