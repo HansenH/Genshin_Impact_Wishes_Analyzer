@@ -1,5 +1,5 @@
 from .wishes_base import WishesBase
-import pandas as pd
+
 
 class CharacterWishes(WishesBase):
     def init_params(self):
@@ -9,4 +9,3 @@ class CharacterWishes(WishesBase):
 
     def to_remote_storage(self):
         pass
-

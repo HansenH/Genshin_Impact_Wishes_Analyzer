@@ -1,22 +1,31 @@
-from genshin_wishes import WishesBase, CharacterWishes, StandardWishes, NoviceWishes, WeaponWishes
+from genshin_wishes import \
+    CharacterWishes, StandardWishes, NoviceWishes, WeaponWishes
 import logging
 import argparse
-from functools import reduce
-from operator import concat
+from common.utils.func import get_url_from_file
+from common.idl.const_thrift import Tasks
 
-def get_job(job_id, url):
-    if job_id == 0:
-        return CharacterWishes(url)
-    elif job_id == 1:
-        return WeaponWishes(url)
-    elif job_id == 2:
-        return StandardWishes(url)
-    elif job_id == 3:
-        return NoviceWishes(url)
-    elif job_id == 4:
-        return [CharacterWishes(url), WeaponWishes(url), StandardWishes(url), NoviceWishes(url)]
+
+def get_tasks(task_id, url):
+    if task_id == Tasks.CharacterWishes:
+        task = CharacterWishes(url)
+    elif task_id == Tasks.WeaponWishes:
+        task = WeaponWishes(url)
+    elif task_id == Tasks.StandardWishes:
+        task = StandardWishes(url)
+    elif task_id == Tasks.NoviceWishes:
+        task = NoviceWishes(url)
+    elif task_id == Tasks.AllWishes:
+        return [
+            CharacterWishes(url),
+            WeaponWishes(url),
+            StandardWishes(url),
+            NoviceWishes(url)
+        ]
     else:
-        raise Exception("job id not found")
+        raise Exception("task id not found")
+    return [task]
+
 
 if __name__ == '__main__':
     help_message = '0 -> Character Wishes; ' \
@@ -25,21 +34,14 @@ if __name__ == '__main__':
         '3 -> Novice Wishes; ' \
         '4 -> All four Wishes.'
     parser = argparse.ArgumentParser(description='Genshine Impact Wishes Data Analyzer')
-    parser.add_argument('job_id', type=int, help=help_message)
+    parser.add_argument('task_id', type=int, help=help_message)
     parser.add_argument('url_file', type=str, help='Genshine Impact request url, README for detail.')
     args = parser.parse_args()
 
-    f = open(args.url_file, "r")
-    url = reduce(concat, f.readlines())
-    f.close()
-    
     try:
-        job = get_job(args.job_id, url)
-        if type(job) != list:
-            job.run()
-        else:
-            for j in job:
-                j.run()
+        tasks = get_tasks(args.task_id, get_url_from_file(args.url_file))
+        for task in tasks:
+            task.run()
     except Exception as ex:
         logging.error(ex)
         exit(1)

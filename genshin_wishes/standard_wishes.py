@@ -1,6 +1,7 @@
 
 from .wishes_base import WishesBase
 
+
 class StandardWishes(WishesBase):
     def init_params(self):
         self.params['gacha_type'] = '200'
@@ -8,4 +9,3 @@ class StandardWishes(WishesBase):
 
     def to_remote_storage(self):
         pass
-

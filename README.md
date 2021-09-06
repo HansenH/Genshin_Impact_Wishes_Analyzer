@@ -18,6 +18,7 @@ Read wishes log from URL and save them to csv and mysql db (local or remote). An
 pip install openpyxl
 pip install pandas
 pip install requests
+pip install thrift2pyi
 ```
 
 ### 使用方法
@@ -44,4 +45,3 @@ For more detail, see `./idl/enum.pyi`.
 > job.run()
 > job.analyze()
 ```
-

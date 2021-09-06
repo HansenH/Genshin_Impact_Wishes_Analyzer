@@ -136,7 +136,7 @@ class WishesBase():
         four_list = []
         five_avg = 0.0
         four_avg = 0.0
-       
+
         for row in self.df.itertuples():
             if row[3] == 3:
                 three_count += 1
@@ -160,7 +160,7 @@ class WishesBase():
             five_percent = round(100 * five_count / total, 2)
             four_percent = round(100 * four_count / total, 2)
             three_percent = round(100 * three_count / total, 2)
-        
+
         return (total, five_count, four_count, three_count, five_percent, four_percent, three_percent,
                 five_avg, four_avg, five_wait, four_wait, five_list, four_list, fromdate, todate)
 
@@ -237,4 +237,3 @@ class WishesBase():
                 fo.write('\n\n四星列表：\n')
                 for item in results[3][12]:
                     fo.write(item[0] + '({}) '.format(item[1]))
-
