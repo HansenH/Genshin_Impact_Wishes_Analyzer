@@ -6,6 +6,10 @@ __pycache__/
 # config file
 url.txt
 
+# result files
+*_analysis.txt
+*_wishes.csv
+
 # C extensions
 *.so
 
