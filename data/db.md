@@ -1,5 +1,7 @@
 # Database Integration for Genshine Impact Wish Analyzer
 
+**DB Name**: `genshine_impact_wishes`
+
 ## Data Structure
 
 Here we take character wishes as an example.

@@ -3,6 +3,7 @@ import time
 import requests
 import pandas as pd
 from urllib import parse
+from data import DataBase
 
 ADDRESS = 'https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog'
 TIMESLEEP = 0.2
@@ -35,9 +36,15 @@ class WishesBase():
         }
 
         self.wishes = []
+        self.df = None
+
+        # file settings
         self.file_name = ''
         self.rst_file_name = ''
-        self.df = None
+
+        # database settings
+        self.table = ''
+        self.db = DataBase()
 
     def run(self):
         self.init_params()
@@ -57,6 +64,8 @@ class WishesBase():
             raise ValueError("file name should be set.")
         if self.rst_file_name == '':
             raise ValueError('result file name should be set.')
+        if self.table == '':
+            raise ValueError('db table name should be set.')
 
     def fetch_request(self):
         while True:
@@ -89,7 +98,6 @@ class WishesBase():
         self.df = pd.DataFrame(
             data, columns=('item_type', 'name', 'rank_type', 'time')
         )
-        print(self.df.to_string())
 
     def to_local_file(self):
         """
@@ -101,7 +109,8 @@ class WishesBase():
         """
         write to local/remote db for record.
         """
-        raise NotImplementedError
+        self.db.append(self.table)(self.df)
+        pass
 
     def analyze(self):
         self.init_params()

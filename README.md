@@ -19,6 +19,7 @@ pip install pandas
 pip install requests
 pip install thrift2pyi
 pip install sqlalchemy
+pip install pymysql
 ```
 
 ### How to Find the API call URL
