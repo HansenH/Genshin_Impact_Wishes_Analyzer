@@ -20,8 +20,8 @@ def analyze(filename):
 
 
 def calculate(dataframe):
-    '''返回总抽卡数，5星总数与占比，4星总数与占比，3星总数与占比，平均y抽出5星，平均y抽出4星，
-       已x抽未出5星，已x抽未出4星，5星列表（抽卡数），4星列表（抽卡数），日期范围'''
+    '''返回总抽卡数, 5星总数与占比, 4星总数与占比, 3星总数与占比, 平均y抽出5星, 平均y抽出4星, 
+       已x抽未出5星, 已x抽未出4星, 5星列表（抽卡数）, 4星列表（抽卡数）, 日期范围'''
     fromdate = dataframe.iat[0, 3].split()[0]
     todate = dataframe.iat[-1, 3].split()[0]
     total = len(dataframe)
@@ -76,8 +76,8 @@ def results_output(results, excel_filename):
             results[0][1], results[0][2], results[0][3]))
         fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
             results[0][4], results[0][5], results[0][6]))
-        fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[0][7], results[0][8]))
-        fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[0][9], results[0][10]))
+        fo.write('平均{}抽出五星, 平均{}抽出四星\n'.format(results[0][7], results[0][8]))
+        fo.write('已{}抽未出五星, 已{}抽未出四星'.format(results[0][9], results[0][10]))
         if results[0][1] > 0:
             fo.write('\n\n五星列表：\n')
             for item in results[0][11]:
@@ -94,8 +94,8 @@ def results_output(results, excel_filename):
             results[1][1], results[1][2], results[1][3]))
         fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
             results[1][4], results[1][5], results[1][6]))
-        fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[1][7], results[1][8]))
-        fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[1][9], results[1][10]))
+        fo.write('平均{}抽出五星, 平均{}抽出四星\n'.format(results[1][7], results[1][8]))
+        fo.write('已{}抽未出五星, 已{}抽未出四星'.format(results[1][9], results[1][10]))
         if results[1][1] > 0:
             fo.write('\n\n五星列表：\n')
             for item in results[1][11]:
@@ -112,8 +112,8 @@ def results_output(results, excel_filename):
             results[2][1], results[2][2], results[2][3]))
         fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
             results[2][4], results[2][5], results[2][6]))
-        fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[2][7], results[2][8]))
-        fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[2][9], results[2][10]))
+        fo.write('平均{}抽出五星, 平均{}抽出四星\n'.format(results[2][7], results[2][8]))
+        fo.write('已{}抽未出五星, 已{}抽未出四星'.format(results[2][9], results[2][10]))
         if results[2][1] > 0:
             fo.write('\n\n五星列表：\n')
             for item in results[2][11]:

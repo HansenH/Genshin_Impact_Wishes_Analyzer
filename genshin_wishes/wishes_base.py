@@ -115,10 +115,10 @@ class WishesBase():
 
     def calculate(self):
         """
-        返回总抽卡数，5星总数与占比，4星总数与占比，3星总数与占比，
-        平均y抽出5星，平均y抽出4星，
-        已x抽未出5星，已x抽未出4星，
-        5星列表（抽卡数），4星列表（抽卡数），日期范围
+        返回总抽卡数, 5星总数与占比, 4星总数与占比, 3星总数与占比,
+        平均y抽出5星, 平均y抽出4星,
+        已x抽未出5星, 已x抽未出4星,
+        5星列表（抽卡数）, 4星列表（抽卡数）, 日期范围
         """
 
         fromdate = self.df.iat[0, 3].split()[0]
@@ -174,8 +174,8 @@ class WishesBase():
                 results[1], results[2], results[3]))
             fo.write('|{}%\t|{}%\t|{}%\t|\n\n'.format(
                 results[4], results[5], results[6]))
-            fo.write('平均{}抽出五星，平均{}抽出四星\n'.format(results[7], results[8]))
-            fo.write('已{}抽未出五星，已{}抽未出四星'.format(results[9], results[10]))
+            fo.write('平均{}抽出五星, 平均{}抽出四星\n'.format(results[7], results[8]))
+            fo.write('已{}抽未出五星, 已{}抽未出四星'.format(results[9], results[10]))
             if results[1] > 0:
                 fo.write('\n\n五星列表：\n')
                 for item in results[11]:
