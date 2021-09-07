@@ -23,3 +23,9 @@ CREATE TABLE `character_wishes` (
     INDEX (`item_type`), INDEX (`rank_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Genshine Impact Character Wishes'
 ```
+
+## Script Usage
+
+```bash
+mysql -h host -u username -p < ./create_tables.sql
+```
