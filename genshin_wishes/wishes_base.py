@@ -11,7 +11,7 @@ PAGE_SIZE = 6
 
 
 class WishesBase():
-    def __init__(self, url):
+    def __init__(self, url, use_csv=True, use_db=True):
         resolved = dict(
             parse.parse_qsl(parse.urlsplit(url.strip()).query)
         )
@@ -35,6 +35,9 @@ class WishesBase():
             'end_id': '0'
         }
 
+        self.use_csv = use_csv
+        self.use_db = use_db
+
         self.wishes = []
         self.df = None
 
@@ -51,8 +54,10 @@ class WishesBase():
         self.check_params()
         self.fetch_request()
         self.process_data()
-        self.to_local_file()
-        self.to_remote_storage()
+        if self.use_csv:
+            self.to_local_file()
+        if self.use_db:
+            self.to_remote_storage()
 
     def init_params(self):
         raise NotImplementedError
@@ -109,8 +114,13 @@ class WishesBase():
         """
         write to local/remote db for record.
         """
-        self.db.append(self.table)(self.df)
-        pass
+        self.db.append(self.table, source="df")(self.df)
+
+    def backup_local_record(self):
+        """
+        sync local csv to db
+        """
+        self.db.append(self.table, source="csv")(self.file_name)
 
     def analyze(self):
         self.init_params()

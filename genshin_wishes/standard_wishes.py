@@ -7,6 +7,4 @@ class StandardWishes(WishesBase):
         self.params['gacha_type'] = '200'
         self.file_name = 'genshine_standard_wishes.csv'
         self.rst_file_name = 'standard_analysis.txt'
-
-    def to_remote_storage(self):
-        pass
+        self.table = 'standard_wishes'
