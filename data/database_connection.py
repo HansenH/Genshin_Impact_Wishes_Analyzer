@@ -1,14 +1,16 @@
 
 from sqlalchemy import create_engine
 import pandas as pd
-# import json
+import json
 
 
 class DataBase():
     def __init__(self):
-        self.username = "hyf"
-        self.password = "dNcRod87283,"
-        self.host = "localhost"
+        with open("data/config.json") as f:
+            config = json.load(f)
+        self.username = config['username']
+        self.password = config['password']
+        self.host = config['host']
         url = "mysql+pymysql://{}:{}@{}/genshine_impact_wishes".format(
             self.username, self.password, self.host
         )
